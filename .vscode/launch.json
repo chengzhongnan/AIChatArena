@@ -1,0 +1,42 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Next.js: Debug Client and Server",
+        "type": "node-terminal",
+        "request": "launch",
+        "command": "npm run dev",
+        "cwd": "${workspaceFolder}",
+        "serverReadyAction": {
+          "pattern": "started server on",
+          "uriFormat": "http://localhost:%p",
+          "action": "openExternally"
+        },
+        "env": {
+          "NODE_OPTIONS": "--inspect"
+        }
+      },
+      {
+        "name": "Genkit: Debug AI Backend",
+        "type": "node",
+        "request": "launch",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run", "genkit:dev"],
+        "port": 9229, // Default Node.js inspect port
+        "console": "integratedTerminal",
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "NODE_OPTIONS": "--inspect-brk=9229" // Use --inspect-brk to pause on the first line
+        }
+      }
+    ],
+    "compounds": [
+      {
+        "name": "Full Stack: Next.js + Genkit",
+        "configurations": [
+          "Next.js: Debug Client and Server",
+          "Genkit: Debug AI Backend"
+        ]
+      }
+    ]
+  }
